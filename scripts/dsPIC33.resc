@@ -1,0 +1,11 @@
+using sysbus
+include @src/platforms/dsPIC33.repl
+
+# sysbus LoadELF $bin  # Commented out since no ELF is available
+
+# Example to start UART and GPIO manually
+sysbus WriteDoubleWord 0x40001000 0x1  # Write to UART control register to enable it
+sysbus WriteDoubleWord 0x40002000 0xFF # Set GPIO pins high
+
+showAnalyzer sysbus.uart0
+start
