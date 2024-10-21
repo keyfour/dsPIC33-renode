@@ -1,14 +1,7 @@
-cpu: TranslationCPU @ sysbus
+sysbus:
+    Endianess: Endianess.LittleEndian
+
+cpu: CPU.DsPic33CPU @ sysbus
     cpuType: "dsPIC33"
-    frequency: "20M"
 
-sysbus LoadAssembly @build/dsPIC33-renode.dll
 
-cpu SetRegisterValue SP 0x2000
-
-uart0: UART @ sysbus 0x40001000
-    -> cpu@2
-
-gpio: GPIO @ sysbus 0x40002000
-
-ram: Memory.MappedMemory @ sysbus <0x00000000, +0x8000>

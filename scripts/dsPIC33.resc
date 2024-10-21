@@ -1,11 +1,15 @@
 using sysbus
-include @src/platforms/dsPIC33.repl
+
+mach create
+i @src/cpu/DsPic33CPU.cs
+# machine LoadPlatformDescriptionFromString 'cpu: CPU.DsPic33CPU @ sysbus 0x40000000 { cpuType: "dsPIC33" }'
+machine LoadPlatformDescription @src/platforms/dsPIC33.repl
 
 # sysbus LoadELF $bin  # Commented out since no ELF is available
 
 # Example to start UART and GPIO manually
-sysbus WriteDoubleWord 0x40001000 0x1  # Write to UART control register to enable it
-sysbus WriteDoubleWord 0x40002000 0xFF # Set GPIO pins high
+# sysbus WriteDoubleWord 0x40001000 0x1  # Write to UART control register to enable it
+# sysbus WriteDoubleWord 0x40002000 0xFF # Set GPIO pins high
 
-showAnalyzer sysbus.uart0
+# cshowAnalyzer sysbus.uart0
 start
